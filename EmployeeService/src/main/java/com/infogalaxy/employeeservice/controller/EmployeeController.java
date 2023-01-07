@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.infogalaxy.employeeservice.entity.Employee;
 import com.infogalaxy.employeeservice.repository.EmployeeRepository;
+import com.infogalaxy.employeeservice.response.EmployeeResponse;
 import com.infogalaxy.employeeservice.service.EmployeeService;
 
 @RestController
@@ -16,9 +17,11 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	
 	@GetMapping("/employee/{id}")
-	public Employee getEmpById(@PathVariable("id") int id) {
-		Employee employee = employeeService.getEmpById(id);
-		return employee;
+	public EmployeeResponse getEmpById(@PathVariable("id") int id) {
+		
+		EmployeeResponse employeeResponse = employeeService.getEmpById(id);
+			
+		return employeeResponse;
 	}
 	
 }
