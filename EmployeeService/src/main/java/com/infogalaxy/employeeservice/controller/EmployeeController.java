@@ -18,14 +18,9 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/{id}")
 	public EmployeeResponse getEmpById(@PathVariable("id") int id) {
-		Employee employee = employeeService.getEmpById(id);
 		
-		EmployeeResponse employeeResponse = new EmployeeResponse();
-		employeeResponse.setId(employee.getId());
-		employeeResponse.setName(employee.getName());
-		employeeResponse.setEmail(employee.getEmail());
-		employeeResponse.setBloodGroup(employee.getBloodGroup());
-		
+		EmployeeResponse employeeResponse = employeeService.getEmpById(id);
+			
 		return employeeResponse;
 	}
 	
