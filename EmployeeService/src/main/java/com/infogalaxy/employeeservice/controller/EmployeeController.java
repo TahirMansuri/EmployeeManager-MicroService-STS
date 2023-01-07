@@ -1,6 +1,8 @@
 package com.infogalaxy.employeeservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +19,11 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	
 	@GetMapping("/employee/{id}")
-	public EmployeeResponse getEmpById(@PathVariable("id") int id) {
+	public ResponseEntity<EmployeeResponse> getEmpById(@PathVariable("id") int id) {
 		
 		EmployeeResponse employeeResponse = employeeService.getEmpById(id);
 			
-		return employeeResponse;
+		return ResponseEntity.status(HttpStatus.OK).body(employeeResponse);
 	}
 	
 }
