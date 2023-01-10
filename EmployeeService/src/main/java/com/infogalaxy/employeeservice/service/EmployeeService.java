@@ -2,6 +2,7 @@ package com.infogalaxy.employeeservice.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,13 +23,16 @@ public class EmployeeService {
 	@Autowired
 	RestTemplate restTemplate;
 	
+	@Value("${addressservice.base.url}")
+	private String addressURL;
+	
 	public EmployeeResponse getEmpById(int id) {
 		Employee employee =  employeeRepository.findById(id).get();
 
 		EmployeeResponse employeeResponse = modelMapper.map(employee, EmployeeResponse.class);
 		
 	
-		AddressResponse addressResponse = restTemplate.getForObject("http://localhost:8082/address/{id}", AddressResponse.class, id);
+		AddressResponse addressResponse = restTemplate.getForObject(addressURL+"/address/{id}", AddressResponse.class, id);
 		
 		employeeResponse.setAddressResponse(addressResponse);
 //		EmployeeResponse employeeResponse = new EmployeeResponse();
